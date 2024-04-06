@@ -69,7 +69,7 @@ with tab1:
     k = st.button('清空/复位')
     st.info("地址信息文件(.xlsx)存储于main.py所在的目录下，请勿删除或重命名，否则将会丢失所有数据！")
     if k:
-        a = pd.DataFrame(columns=["Name", "lat","lon","Intro","Color","People"])
+        a = pd.DataFrame(columns=["Name", "lat","lon","Intro","Color","People","Name_en"])
         a.to_excel('RedPoint_AddressData.xlsx', index=False)
         st.success("操作成功！")
         time.sleep(0.4)
@@ -90,7 +90,7 @@ with tab2:
 
                 # 绘制柱状图，并通过color参数设置颜色，通过linewidth参数设置粗细
                 ax.bar(df['Name_en'], a['People'], color=df["Color"], linewidth=2)
-                st.title("实时景点客流量")
+                st.title("模拟景点客流量")
                 ax.set_ylabel('People')
                 ax.set_title('')
                 plt.xticks(rotation=90)
