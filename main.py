@@ -89,9 +89,9 @@ with tab2:
                 fig, ax = plt.subplots()
 
                 # 绘制柱状图，并通过color参数设置颜色，通过linewidth参数设置粗细
-                ax.bar(a['Name'], a['People'], color=df["Color"], linewidth=2)
+                ax.bar(df['Name_en'], a['People'], color=df["Color"], linewidth=2)
                 st.title("实时景点客流量")
-                ax.set_ylabel('人数')
+                ax.set_ylabel('People')
                 ax.set_title('')
                 plt.xticks(rotation=90)
                 # 使用Streamlit的st.pyplot函数显示图表
@@ -118,6 +118,7 @@ with tab3:
     try:
         a = pd.read_excel('RedPoint_AddressData.xlsx')
         address = st.text_input("请输入地标所在的具体位置：",key=222)
+        en=st.text_input("请输入地标英文名：",key=7777)
         intro = st.text_input("请输入该地标的介绍:",key=333)
         color = st.color_picker("请选择地标标志色:",key=3333)
         picture =st.file_uploader("请上传地标图片:",type="webp")
@@ -129,7 +130,7 @@ with tab3:
                     # 示例使用
                     latitude = getlat(address)-0.0035
                     longitude = getlng(address)-0.0103
-                    a=a._append({'Name':address,'lat':latitude,'lon':longitude,'Intro':intro,'Color':color,'People':random.randint(100,9999)},ignore_index=True)
+                    a=a._append({'Name':address,'lat':latitude,'lon':longitude,'Intro':intro,'Color':color,'People':random.randint(100,9999),"Name_en":en},ignore_index=True)
                     a.to_excel('RedPoint_AddressData.xlsx', index=False)
                     bytes_data = picture.read()
                     with open(address+".webp", "wb") as file:
